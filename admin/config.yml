@@ -1,0 +1,45 @@
+# ▼ 아래 repo 값의 "GITHUB아이디" 부분을 본인 GitHub 아이디로 바꿔 주세요.
+backend:
+  name: github
+  repo: GITHUB아이디/hanmaumtc-homepage
+  branch: main
+
+locale: ko
+site_url: /
+display_url: /
+media_folder: images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: notices
+    label: 공지사항
+    editor:
+      preview: false
+    files:
+      - name: list
+        label: 공지 목록
+        file: content/notices.json
+        fields:
+          - label: 공지
+            name: notices
+            widget: list
+            add_to_top: true
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - { label: 날짜, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - label: 분류
+                name: cat
+                widget: select
+                default: notice
+                options:
+                  - { label: 공지, value: notice }
+                  - { label: 모집, value: recruit }
+                  - { label: 채용, value: job }
+              - { label: 목록 맨 위에 고정, name: pinned, widget: boolean, default: false, required: false }
+              - { label: 내용, name: body, widget: text }
+              - label: 사진
+                name: photos
+                widget: list
+                required: false
+                field: { label: 사진, name: image, widget: image, choose_url: false }
